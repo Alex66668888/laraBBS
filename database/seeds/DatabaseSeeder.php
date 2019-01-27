@@ -11,7 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // 注意调用执行顺序不能出错
+
+        $this->call(UsersTableSeeder::class);
 		$this->call(TopicsTableSeeder::class);
     }
 }
