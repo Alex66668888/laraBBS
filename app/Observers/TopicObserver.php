@@ -20,6 +20,10 @@ class TopicObserver
     }
 
     public function saving(Topic $topic){
+        // 避免 xss 攻击
+        $topic->body = clean($topic->body, 'user_topic_body');
+
+        // 裁剪部分文本
         $topic->excerpt = make_excerpt($topic->body);
     }
 

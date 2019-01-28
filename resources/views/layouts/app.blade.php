@@ -13,6 +13,9 @@
         <!-- 继承此模板的页面，如果没有定制 title 区域的话，就会自动使用第二个参数 LaraBBS 作为标题前缀。 -->
         <title>@yield('title', 'laraBBS') - Laravel 进阶练手</title>
 
+        <!-- 用作 SEO 页面描述使用 -->
+        <meta name="description" content="@yield('description', 'LaraBBS 爱好者')" />
+
         <!-- Styles -->
         <!-- 根据 webpack.mix.js 的逻辑来生成 CSS 文件链接。 -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">

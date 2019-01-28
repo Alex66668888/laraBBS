@@ -66,6 +66,13 @@ class TopicsController extends Controller
 	}
 
 
+    /**
+     * html 编辑器上传图片
+     *
+     * @param Request $request
+     * @param ImageUploadHandler $uploader
+     * @return array
+     */
 	public function uploadImage(Request $request, ImageUploadHandler $uploader){
         // 初始化返回数据，默认是失败的
         $data = [
