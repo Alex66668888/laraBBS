@@ -48,6 +48,7 @@ Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show
 // html 编辑器上传图片
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+// 话题分类
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
-
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+// 话题回复
+Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
