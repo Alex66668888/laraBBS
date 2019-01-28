@@ -11,4 +11,4 @@ npm-debug.log
 yarn-error.log
 
 /.idea
-/public/uploads/images/avatar/*
+/public/uploads/images/*
