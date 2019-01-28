@@ -56,6 +56,15 @@ class Topic extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
+    /**
+     * 给 url 添加参数
+     * @param array $params
+     * @return string
+     */
+    public function link($params = []){
+        return route('topics.show', array_merge([$this->id, $this->slug], $params));
+    }
+
 
 
 
