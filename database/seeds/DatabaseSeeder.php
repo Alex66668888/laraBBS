@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         // 注意调用执行顺序不能出错
 
         $this->call(UsersTableSeeder::class);
-		$this->call(TopicsTableSeeder::class);
+        $this->call(TopicsTableSeeder::class);
+		$this->call(ReplysTableSeeder::class);
+
     }
 }

@@ -65,6 +65,16 @@ class Topic extends Model
         return route('topics.show', array_merge([$this->id, $this->slug], $params));
     }
 
+    /**
+     * 一条帖子拥有多个话题
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
 
 
 
