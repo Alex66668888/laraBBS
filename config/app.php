@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // 注册 easysms
+        App\Providers\EasySmsServiceProvider::class,
+
     ],
 
     /*
