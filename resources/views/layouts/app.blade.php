@@ -16,7 +16,7 @@
         <!-- 用作 SEO 页面描述使用 -->
         <meta name="description" content="@yield('description', setting('seo_description', 'LaraBBS 爱好者社区。'))" />
         <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'LaraBBS,社区,论坛,开发者论坛'))" />
-        
+
         <!-- Styles -->
         <!-- 根据 webpack.mix.js 的逻辑来生成 CSS 文件链接。 -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
