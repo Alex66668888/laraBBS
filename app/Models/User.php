@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ActiveUserHelper;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     // trait 引入权限系统
     use HasRoles;
+
+    use ActiveUserHelper;
 
     public function notify($instance)
     {
