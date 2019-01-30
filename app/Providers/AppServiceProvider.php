@@ -30,5 +30,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+        // 只在开发环境中注册切换用户的包
+        if (app()->isLocal()) {
+            $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+        }
+
     }
 }

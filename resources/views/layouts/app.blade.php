@@ -44,6 +44,11 @@
 
         </div>
 
+        {{-- 引入用户切换工具 --}}
+        @if (app()->isLocal())
+            @include('sudosu::user-selector')
+        @endif
+
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}"></script>
 
