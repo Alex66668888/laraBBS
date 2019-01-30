@@ -75,6 +75,15 @@ class Topic extends Model
         return $this->hasMany(Reply::class);
     }
 
+    /**
+     * 重新计算回复帖子数量
+     */
+    public function updateReplyCount()
+    {
+        $this->reply_count = $this->replies->count();
+        $this->save();
+    }
+
 
 
 
