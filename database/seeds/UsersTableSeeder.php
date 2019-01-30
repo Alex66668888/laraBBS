@@ -44,12 +44,19 @@ class UsersTableSeeder extends Seeder
 
         // 单独处理第一个用户的数据
         $user = User::find(1);
+
+        // 初始化用户角色，将 1 号用户指派为『站长』
+        $user->assignRole('Founder');
+
         $user->name = 'Alex';
         $user->email = '1414818093@qq.com';
         $user->avatar = 'https://iocaffcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png';
         $user->password = bcrypt('123456');
         $user->save();
 
+        // 将 2 号用户指派为『管理员』
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
 
 
     }
