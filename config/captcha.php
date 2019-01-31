@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * https://github.com/mewebstudio/captcha
+ */
+
 return [
 
     'characters' => '2346789abcdefghjmnpqrtuxyzABCDEFGHJMNPQRTUXYZ',
