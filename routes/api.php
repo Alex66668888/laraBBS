@@ -29,17 +29,23 @@ $api->version('v1', [
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires'),
     ], function($api){
-        // 短信验证码
+        // 图片验证码(第一步：用户通过提交手机号得到图形验证码)
+        $api->post('captchas', 'CaptchasController@store')
+            ->name('api.captchas.store');
+
+        // 短信验证码（第二步：根据图像验证码获取短信验证码）
         $api->post('verificationCodes', 'VerificationCodesController@store')
             ->name('api.verificationCodes.store');
 
-        // 用户注册
+        // 用户注册（第三步：完成用户注册）
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');
 
-        // 图片验证码
-        $api->post('captchas', 'CaptchasController@store')
-            ->name('api.captchas.store');
+        // 第三方登录
+        $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
+            ->name('api.socials.authorizations.store');
+
+
 
 
 
