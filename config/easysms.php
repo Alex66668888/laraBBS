@@ -30,14 +30,4 @@ return [
 ];
 
 
-$sms = app('easysms');
-try {
-    $sms->send(15549328668, [
-        'content'  => '【云片网】您的验证码是1234。如非本人操作，请忽略本短信',
-    ]);
-} catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
-    $message = $exception->getException('yunpian')->getMessage();
-    dd($message);
-}
-
 
