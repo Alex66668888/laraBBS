@@ -253,6 +253,14 @@ return [
         ],
     ],
 
+    /**
+     * JWT 相关的配置 ( jwt-auth )
+     * https://github.com/tymondesigns/jwt-auth
+     */
+    'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
+    ],
+
 
 
 ];
