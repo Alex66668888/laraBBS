@@ -21,7 +21,11 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api'
+    'namespace' => 'App\Http\Controllers\Api',
+    // 切换 DingoApi 默认使用的 Fractal 的 DataArraySerializer 成 ArraySerializer
+    // 需要安装中间件包：dingo-serializer-switch
+    // https://github.com/liyu001989/dingo-serializer-switch
+    'middleware' => 'serializer:array'
 ], function($api) {
 
     $api->group([
@@ -45,7 +49,7 @@ $api->version('v1', [
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
 
-        // 登录
+        // 账号（用户名或手机号）密码登录
         $api->post('authorizations', 'AuthorizationsController@store')
             ->name('api.authorizations.store');
 
@@ -57,13 +61,24 @@ $api->version('v1', [
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
 
-
-
-
-
     });
 
 
+
+    $api->group([
+        'middleware' => 'api.throttle',
+        'limit' => config('api.rate_limits.access.limit'),
+        'expires' => config('api.rate_limits.access.expires'),
+    ], function ($api) {
+        // 游客可以访问的接口
+
+        // 需要 token 验证的接口
+        $api->group(['middleware' => 'api.auth'], function($api) {
+            // 当前登录用户信息
+            $api->get('user', 'UsersController@me')
+                ->name('api.user.show');
+        });
+    });
 
 
 
