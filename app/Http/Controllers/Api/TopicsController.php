@@ -10,6 +10,13 @@ use App\Transformers\TopicTransformer;
 class TopicsController extends Controller
 {
 
+    /**
+     * 新建话题（帖子）
+     *
+     * @param TopicRequest $request
+     * @param Topic $topic
+     * @return \Dingo\Api\Http\Response
+     */
     public function store(TopicRequest $request, Topic $topic)
     {
         $topic->fill($request->all());
@@ -23,6 +30,15 @@ class TopicsController extends Controller
         return $this->response->item($topic, new TopicTransformer())
             ->setStatusCode(201);
 
+    }
+
+
+    public function update(TopicRequest $request, Topic $topic)
+    {
+        $this->authorize('update', $topic);
+
+        $topic->update($request->all());
+        return $this->response->item($topic, new TopicTransformer());
     }
 
 

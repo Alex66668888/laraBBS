@@ -22,10 +22,13 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
+
     // 切换 DingoApi 默认使用的 Fractal 的 DataArraySerializer 成 ArraySerializer
     // 需要安装中间件包：dingo-serializer-switch
     // https://github.com/liyu001989/dingo-serializer-switch
-    'middleware' => 'serializer:array'
+
+    // bindings: 模型绑定的中间件
+    'middleware' => ['serializer:array', 'bindings']
 ], function($api) {
 
     $api->group([
@@ -94,6 +97,10 @@ $api->version('v1', [
             // 发布话题
             $api->post('topics', 'TopicsController@store')
                 ->name('api.topics.store');
+
+            // 编辑话题
+            $api->patch('topics/{topic}', 'TopicsController@update')
+                ->name('api.topics.update');
 
 
 

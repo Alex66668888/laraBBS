@@ -37,5 +37,17 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
         }
 
+
+        // api 模型找不到抛出 404
+        \API::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            abort(404);
+        });
+
+        // api 授权失败抛出 403
+        \API::error(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
+            abort(403, $exception->getMessage());
+        });
+
+
     }
 }
