@@ -71,6 +71,8 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request)
     {
+        // $this->user() 等同于\Auth::guard('api')->user()
+        // 见 Dingo\Api\Routing\Helpers 这个 trait
         $user = $this->user();
 
         // only() 只会返回 name、email、introduction 字段
