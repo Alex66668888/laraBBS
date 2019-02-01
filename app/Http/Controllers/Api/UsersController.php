@@ -6,6 +6,7 @@ use App\Http\Requests\Api\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Transformers\UserTransformer;
+use App\Models\Image;
 
 
 class UsersController extends Controller
@@ -59,6 +60,31 @@ class UsersController extends Controller
         // $this->user() 等同于\Auth::guard('api')->user()
         // 见 Dingo\Api\Routing\Helpers 这个 trait
         return $this->response->item($this->user(), new UserTransformer());
+    }
+
+
+    /**
+     * 修改用户信息 (PATCH)
+     *
+     * @param UserRequest $request
+     * @return \Dingo\Api\Http\Response
+     */
+    public function update(UserRequest $request)
+    {
+        $user = $this->user();
+
+        // only() 只会返回 name、email、introduction 字段
+        $attributes = $request->only(['name', 'email', 'introduction']);
+
+        if ($request->avatar_image_id) {
+            // 从资源表中挑选出一条资源
+            $image = Image::find($request->avatar_image_id);
+
+            $attributes['avatar'] = $image->path;
+        }
+        $user->update($attributes);
+
+        return $this->response->item($user, new UserTransformer());
     }
 
 
