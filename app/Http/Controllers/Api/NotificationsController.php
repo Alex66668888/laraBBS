@@ -21,6 +21,18 @@ class NotificationsController extends Controller
     }
 
 
+    /**
+     * 通知数据统计
+     * @return mixed
+     */
+    public function stats()
+    {
+        return $this->response->array([
+            'unread_count' => $this->user()->notification_count,
+        ]);
+    }
+
+
 
 
 
