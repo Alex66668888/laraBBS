@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
     // trait 引入权限系统
     use HasRoles;
 
+    // trait 引入活跃用户
     use ActiveUserHelper;
 
     // trait 引入用户最后登录时间

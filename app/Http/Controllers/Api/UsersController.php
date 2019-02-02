@@ -90,6 +90,18 @@ class UsersController extends Controller
     }
 
 
+    /**
+     * 获取活跃用户列表
+     *
+     * @param User $user
+     * @return \Dingo\Api\Http\Response
+     */
+    public function activedIndex(User $user)
+    {
+        return $this->response->collection($user->getActiveUsers(), new UserTransformer());
+    }
+
+
 
 
 }
