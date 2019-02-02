@@ -76,7 +76,7 @@ class UsersController extends Controller
         $user = $this->user();
 
         // only() 只会返回 name、email、introduction 字段
-        $attributes = $request->only(['name', 'email', 'introduction']);
+        $attributes = $request->only(['name', 'email', 'introduction', 'registration_id']);
 
         if ($request->avatar_image_id) {
             // 从资源表中挑选出一条资源

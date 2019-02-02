@@ -179,6 +179,8 @@ return [
 
         // 注册 easysms
         App\Providers\EasySmsServiceProvider::class,
+        // Jpush SDK
+        App\Providers\JpushServiceProvider::class,
 
     ],
 
