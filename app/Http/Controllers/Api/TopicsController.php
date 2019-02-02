@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Api\TopicRequest;
 use App\Models\Topic;
 use App\Transformers\TopicTransformer;
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -63,6 +64,54 @@ class TopicsController extends Controller
 
         $topic->delete();
         return $this->response->noContent();
+    }
+
+
+    /**
+     * 话题列表（支持分类查询、创建时间和更新时间排序）
+     * @param Request $request
+     * @param Topic $topic
+     * @return \Dingo\Api\Http\Response
+     */
+    public function index(Request $request, Topic $topic)
+    {
+        $query = $topic->query();
+
+        if ($categoryId = $request->category_id) {
+            $query->where('category_id', $categoryId);
+        }
+
+        // 为了说明 N+1问题，不使用 scopeWithOrder
+        switch ($request->order) {
+            case 'recent':
+                // 创建时间排序
+                $query->recent();
+                break;
+
+            default:
+                // 更新时间排序
+                $query->recentReplied();
+                break;
+        }
+
+        $topics = $query->paginate(20);
+
+        return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+
+    /**
+     * 根据用户查询话题
+     * @param User $user
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
+    public function userIndex(User $user, Request $request)
+    {
+        $topics = $user->topics()->recent()
+            ->paginate(20);
+
+        return $this->response->paginator($topics, new TopicTransformer());
     }
 
 
