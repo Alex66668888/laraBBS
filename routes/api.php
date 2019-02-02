@@ -28,7 +28,8 @@ $api->version('v1', [
     // https://github.com/liyu001989/dingo-serializer-switch
 
     // bindings: 模型绑定的中间件
-    'middleware' => ['serializer:array', 'bindings']
+    // change-locale 设置本地语言的中间件
+    'middleware' => ['serializer:array', 'bindings', 'change-locale']
 ], function($api) {
 
     $api->group([
