@@ -7,6 +7,10 @@ use League\Fractal\TransformerAbstract;
 
 class ReplyTransformer extends TransformerAbstract
 {
+
+    protected $availableIncludes = ['user', 'topic'];
+
+
     public function transform(Reply $reply)
     {
         return [
@@ -18,4 +22,19 @@ class ReplyTransformer extends TransformerAbstract
             'updated_at' => $reply->updated_at->toDateTimeString(),
         ];
     }
+
+
+    public function includeUser(Reply $reply)
+    {
+        return $this->item($reply->user, new UserTransformer());
+    }
+
+
+    public function includeTopic(Reply $reply)
+    {
+        return $this->item($reply->topic, new TopicTransformer());
+    }
+
+
+
 }
