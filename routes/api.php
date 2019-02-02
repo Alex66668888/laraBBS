@@ -84,6 +84,9 @@ $api->version('v1', [
         // 根据某个用户查询话题列表
         $api->get('users/{user}/topics', 'TopicsController@userIndex')
             ->name('api.users.topics.index');
+        // 单个话题详情
+        $api->get('topics/{topic}', 'TopicsController@show')
+            ->name('api.topics.show');
 
 
 

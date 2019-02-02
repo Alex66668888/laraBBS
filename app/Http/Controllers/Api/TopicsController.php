@@ -115,6 +115,17 @@ class TopicsController extends Controller
     }
 
 
+    /**
+     * 单个话题详情
+     *
+     * @param Topic $topic
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(Topic $topic){
+        return $this->response->item($topic, new TopicTransformer());
+    }
+
+
 
 
 }
