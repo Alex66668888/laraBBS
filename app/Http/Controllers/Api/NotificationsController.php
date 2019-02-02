@@ -33,6 +33,19 @@ class NotificationsController extends Controller
     }
 
 
+    /**
+     * 标记所有未读消息为已读状态
+     *
+     * @return \Dingo\Api\Http\Response
+     */
+    public function read()
+    {
+        $this->user()->markAsRead();
+
+        return $this->response->noContent();
+    }
+
+
 
 
 
