@@ -21,7 +21,7 @@ class RepliesController extends Controller
      */
     public function store(ReplyRequest $request, Topic $topic, Reply $reply)
     {
-        $reply->content = $request->content;
+        $reply->content = $request->input('content');
         $reply->topic_id = $topic->id;
         $reply->user_id = $this->user()->id;
         $reply->save();
@@ -29,6 +29,29 @@ class RepliesController extends Controller
         return $this->response->item($reply, new ReplyTransformer())
             ->setStatusCode(201);
     }
+
+
+    /**
+     * 删除话题回复
+     *
+     * @param Topic $topic
+     * @param Reply $reply
+     * @return \Dingo\Api\Http\Response|void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Topic $topic, Reply $reply)
+    {
+        // 用户提交的话题 id 和回复表中的话题 id 必须一致
+        if ($reply->topic_id != $topic->id) {
+            return $this->response->errorBadRequest();
+        }
+
+        $this->authorize('destroy', $reply);
+        $reply->delete();
+
+        return $this->response->noContent();
+    }
+
 
 
 
