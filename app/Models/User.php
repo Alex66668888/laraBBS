@@ -52,7 +52,9 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
     protected $fillable = [
         'name', 'email', 'password', 'introduction', 'avatar', 'phone',
         // registration_id 为 app 消息推送的唯一标识
-        'weixin_openid', 'weixin_unionid', 'registration_id'
+        'weixin_openid', 'weixin_unionid', 'registration_id',
+        // weixin_session_key 是用于解密微信的手机以及用户信息等接口数据的秘钥
+        'weixin_session_key', 'weapp_openid',
     ];
 
     /**
