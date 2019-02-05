@@ -160,6 +160,17 @@ class UsersController extends Controller
     }
 
 
+    /**
+     * 用户详情
+     * @param User $user
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(User $user)
+    {
+        return $this->response->item($user, new UserTransformer());
+    }
+
+
 
 
 }
