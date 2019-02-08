@@ -76,6 +76,15 @@ class Topic extends Model
     }
 
     /**
+     * 显示5条回复
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function topReplies()
+    {
+        return $this->replies()->limit(5);
+    }
+
+    /**
      * 重新计算回复帖子数量
      */
     public function updateReplyCount()
